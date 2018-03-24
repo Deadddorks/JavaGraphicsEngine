@@ -21,9 +21,9 @@ public class IBO
 	{
 		id = glGenBuffers();
 		elementCount = indices.length;
-		bind();
 		IntBuffer buffer = arrayToBuffer(indices);
-		glBufferData(id, buffer, GL_STATIC_DRAW);
+		bind();
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, buffer, GL_STATIC_DRAW);
 	}
 	
 	public void bind()
@@ -55,6 +55,7 @@ public class IBO
 	
 	public void destroy()
 	{
+		unbind();
 		glDeleteBuffers(id);
 	}
 	

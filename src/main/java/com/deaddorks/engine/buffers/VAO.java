@@ -31,8 +31,8 @@ public class VAO
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glEnableVertexAttribArray(index);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glVertexAttribPointer(index, components, glType, false, 0, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 	
 	public void disableVertexAttribute(int index)
@@ -47,6 +47,7 @@ public class VAO
 	
 	public void destroy()
 	{
+		unbind();
 		glDeleteVertexArrays(id);
 	}
 	

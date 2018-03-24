@@ -17,9 +17,9 @@ public class VBO
 	public VBO(final float[] vertices)
 	{
 		id = glGenBuffers();
-		bind();
 		FloatBuffer buffer = arrayToBuffer(vertices);
-		glBufferData(id, buffer, GL_STATIC_DRAW);
+		bind();
+		glBufferData(GL_ARRAY_BUFFER, buffer, GL_STATIC_DRAW);
 	}
 	
 	public void bind()
@@ -39,6 +39,7 @@ public class VBO
 	
 	public void destroy()
 	{
+		unbind();
 		glDeleteBuffers(id);
 	}
 	
