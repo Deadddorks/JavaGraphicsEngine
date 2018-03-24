@@ -25,7 +25,7 @@ public class Shader
 		this.fragment = fragment;
 	}
 	
-	private void compile()
+	public void compile()
 	{
 		int id = glCreateProgram();
 		int vs = compileShader(GL_VERTEX_SHADER, vertex);
@@ -53,10 +53,9 @@ public class Shader
 	{
 		glUseProgram(getId());
 	}
-	
-	public void bindAttribute(final int attribute, final String variableName)
+	public void unbind()
 	{
-		glBindAttribLocation(getId(), attribute, variableName);
+		glUseProgram(0);
 	}
 	
 	private static int compileShader(final int type, final String code)
