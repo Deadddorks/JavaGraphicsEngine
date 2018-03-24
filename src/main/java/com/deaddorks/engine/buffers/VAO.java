@@ -22,7 +22,7 @@ public class VAO
 		glBindVertexArray(id);
 	}
 	
-	public void unbind()
+	public static void unbind()
 	{
 		glBindVertexArray(0);
 	}
@@ -33,6 +33,11 @@ public class VAO
 		glEnableVertexAttribArray(index);
 		glVertexAttribPointer(index, components, glType, false, 0, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	
+	public void bindVBO(final int index, final int components, final VBO vbo)
+	{
+		enableVertexAttribute(index, components, GL_FLOAT, vbo.getId());
 	}
 	
 	public void disableVertexAttribute(int index)

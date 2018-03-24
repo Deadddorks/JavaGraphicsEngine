@@ -31,7 +31,7 @@ public class IBO
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
 	}
 	
-	public void unbind()
+	public static void unbind()
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}

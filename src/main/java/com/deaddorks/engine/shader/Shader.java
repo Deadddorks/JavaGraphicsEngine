@@ -53,7 +53,7 @@ public class Shader
 	{
 		glUseProgram(getId());
 	}
-	public void unbind()
+	public static void unbind()
 	{
 		glUseProgram(0);
 	}
@@ -109,7 +109,7 @@ public class Shader
 		}
 		catch (IOException e)
 		{
-			System.out.println("Error shader from file [" + file.getPath() + "] on line (" + lineNum + ")");
+			System.out.println("Error reading shader from file [" + file.getPath() + "] on line (" + lineNum + ")");
 			System.exit(-1);
 		}
 		

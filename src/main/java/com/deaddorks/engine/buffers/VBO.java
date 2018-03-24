@@ -27,7 +27,7 @@ public class VBO
 		glBindBuffer(GL_ARRAY_BUFFER, id);
 	}
 	
-	public void unbind()
+	public static void unbind()
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
