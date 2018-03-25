@@ -41,6 +41,12 @@ public class Shader
 		this.id = id;
 	}
 	
+	public void sendUniformVec3f(final String uniformName, final float v1, final float v2, final float v3)
+	{
+		int uniformLoc = glGetUniformLocation(getId(), uniformName);
+		glUniform3f(uniformLoc, v1, v2, v3);
+	}
+	
 	public void destroy()
 	{
 		glUseProgram(0);
