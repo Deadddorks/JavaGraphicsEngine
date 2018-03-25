@@ -1,7 +1,6 @@
 package com.deaddorks.engine.shader;
 
 import org.lwjgl.BufferUtils;
-import sun.plugin.dom.exception.InvalidStateException;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -81,7 +80,7 @@ public class Shader
 	{
 		if (id == -1)
 		{
-			throw new InvalidStateException("Shader is not active");
+			throw new IllegalStateException("Shader is not active");
 		}
 		return id;
 	}

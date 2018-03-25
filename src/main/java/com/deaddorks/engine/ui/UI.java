@@ -12,10 +12,10 @@ public abstract class UI
 
 	protected Window window;
 	
-	public UI(final String title, final int width, final int height)
+	public UI(final String title, final int width, final int height, final boolean resizable)
 	{
 		window = new Window();
-		window.create(title, width, height);
+		window.create(title, width, height, resizable ? GLFW_TRUE : GLFW_FALSE);
 	}
 	
 	protected abstract void init();

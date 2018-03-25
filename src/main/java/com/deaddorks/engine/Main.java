@@ -7,7 +7,6 @@ import com.deaddorks.engine.model.Model;
 import com.deaddorks.engine.render.Renderer;
 import com.deaddorks.engine.shader.Shader;
 import com.deaddorks.engine.ui.UI;
-import com.deaddorks.engine.window.Window;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		
-		UI ui = new UI("Engine 2.0", 500, 500)
+		UI ui = new UI("Engine 2.0", 500, 500, false)
 		{
 			
 			private Shader shader;
@@ -46,17 +45,16 @@ public class Main
 						0.75f, -0.75f, 0f,
 				}));
 				vao.bindVBO(1, 4, new VBO(new float[] {
-						1.0f, 0.0f, 0.0f, 1.0f,
-						0.0f, 1.0f, 0.0f, 1.0f,
-						0.0f, 0.0f, 1.0f, 1.0f,
-						1.0f, 0.0f, 1.0f, 1.0f
+						1.0f, 1.0f, 1.0f, 1.0f,
+						0.5f, 0.5f, 0.5f, 1.0f,
+						0.0f, 0.0f, 0.0f, 1.0f,
+						0.5f, 0.5f, 0.5f, 1.0f
 				}));
 				VAO.unbind();
 				models.add(new Model(new IBO(new int[] {
 						0, 1, 2,
 						2, 3, 0
 				}), vao, shader));
-				
 				
 				VAO vao2 = new VAO();
 				vao2.bind();
@@ -66,14 +64,15 @@ public class Main
 						0.0f,  0.5f, 0.0f
 				}));
 				vao2.bindVBO(1, 4, new VBO(new float[] {
-						1.0f, 1.0f, 1.0f, 1.0f,
-						0.0f, 0.0f, 0.0f, 1.0f,
-						0.3f, 0.3f, 0.3f, 1.0f
+						1.0f, 0.0f, 0.0f, 1.0f,
+						0.0f, 1.0f, 0.0f, 1.0f,
+						0.0f, 0.0f, 1.0f, 1.0f
 				}));
 				VAO.unbind();
 				models.add(new Model(new IBO(new int[] {
 						0, 1, 2
 				}), vao2, shader));
+				
 				
 			}
 			
@@ -94,7 +93,7 @@ public class Main
 			@Override
 			protected void cleanUp()
 			{
-			
+				shader.destroy();
 			}
 		};
 		
