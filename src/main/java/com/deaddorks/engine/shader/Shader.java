@@ -48,19 +48,27 @@ public class Shader
 	
 	public void uniform1f(final String uniformName, final float v1)
 	{
+		use();
 		glUniform1f(getUniformLoc(uniformName), v1);
+		unbind();
 	}
 	public void uniform2f(final String uniformName, final float v1, final float v2)
 	{
+		use();
 		glUniform2f(getUniformLoc(uniformName), v1, v2);
+		unbind();
 	}
 	public void uniform3f(final String uniformName, final float v1, final float v2, final float v3)
 	{
+		use();
 		glUniform3f(getUniformLoc(uniformName), v1, v2, v3);
+		unbind();
 	}
 	public void uniform4f(final String uniformName, final float v1, final float v2, final float v3, final float v4)
 	{
+		use();
 		glUniform4f(getUniformLoc(uniformName), v1, v2, v3, v4);
+		unbind();
 	}
 	
 	public void destroy()
