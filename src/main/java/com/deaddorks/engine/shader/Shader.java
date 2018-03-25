@@ -41,10 +41,26 @@ public class Shader
 		this.id = id;
 	}
 	
-	public void sendUniformVec3f(final String uniformName, final float v1, final float v2, final float v3)
+	public int getUniformLoc(final String uniformName)
 	{
-		int uniformLoc = glGetUniformLocation(getId(), uniformName);
-		glUniform3f(uniformLoc, v1, v2, v3);
+		return glGetUniformLocation(getId(), uniformName);
+	}
+	
+	public void uniform1f(final String uniformName, final float v1)
+	{
+		glUniform1f(getUniformLoc(uniformName), v1);
+	}
+	public void uniform2f(final String uniformName, final float v1, final float v2)
+	{
+		glUniform2f(getUniformLoc(uniformName), v1, v2);
+	}
+	public void uniform3f(final String uniformName, final float v1, final float v2, final float v3)
+	{
+		glUniform3f(getUniformLoc(uniformName), v1, v2, v3);
+	}
+	public void uniform4f(final String uniformName, final float v1, final float v2, final float v3, final float v4)
+	{
+		glUniform4f(getUniformLoc(uniformName), v1, v2, v3, v4);
 	}
 	
 	public void destroy()
