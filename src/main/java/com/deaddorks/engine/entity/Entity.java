@@ -12,6 +12,7 @@ public class Entity
 	
 	private String shaderUniformVar;
 	private double x, y, z;
+	private double xV, yV, zV;
 	
 	public Entity(final RawModel model, final String shaderUniformVar, final Shader shader)
 	{
@@ -31,6 +32,20 @@ public class Entity
 		this.x = x;
 		this.y = y;
 		this.z = z;
+		shader.uniform3f(shaderUniformVar, (float) x, (float) y, (float) z);
+	}
+	public void setVelocities(final double xV, final double yV, final double zV)
+	{
+		this.xV = xV;
+		this.yV = yV;
+		this.zV = zV;
+	}
+	
+	public void move()
+	{
+		x += xV;
+		y += yV;
+		z += zV;
 		shader.uniform3f(shaderUniformVar, (float) x, (float) y, (float) z);
 	}
 	
@@ -55,6 +70,19 @@ public class Entity
 	public double getZ()
 	{
 		return z;
+	}
+	
+	public double getxV()
+	{
+		return xV;
+	}
+	public double getyV()
+	{
+		return yV;
+	}
+	public double getzV()
+	{
+		return zV;
 	}
 	
 	public void destroy()
