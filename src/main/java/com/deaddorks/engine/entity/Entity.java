@@ -1,30 +1,52 @@
 package com.deaddorks.engine.entity;
 
-import com.deaddorks.engine.model.BasicModel;
+import com.deaddorks.engine.buffers.IBO;
+import com.deaddorks.engine.buffers.VAO;
 import com.deaddorks.engine.model.RawModel;
 import com.deaddorks.engine.shader.Shader;
 
-public class Entity
+import static org.lwjgl.opengl.GL11.*;
+
+public class Entity extends RawModel
 {
 	
+	private VAO vao;
+	private IBO ibo;
 	private Shader shader;
-	private RawModel model;
+	private final String shaderPosString;
 	
-	private String shaderUniformVar;
 	private double x, y, z;
-	private double xV, yV, zV;
 	
-	public Entity(final RawModel model, final String shaderUniformVar, final Shader shader)
+	public Entity(final VAO vao, final IBO ibo, final String shaderDirPath, final String shaderPosString)
 	{
-		this.model = model;
-		this.shaderUniformVar = shaderUniformVar;
-		this.shader = shader;
+		this.shaderPosString = shaderPosString;
+		this.shader = Shader.parseShaderFromFile(shaderDirPath + "vertex.shader", shaderDirPath + "fragment.shader");
+		
+		this.vao = vao;
+		this.ibo = ibo;
 	}
-	public Entity(final BasicModel model, final String shaderUniformVar, final String shaderFolderPath)
+	
+	@Override
+	public void render()
 	{
-		this.model = model;
-		this.shaderUniformVar = shaderUniformVar;
-		this.shader = Shader.parseShaderFromFile(shaderFolderPath + "vertex.shader", shaderFolderPath + "fragment.shader");
+		shader.use();
+		vao.bind();
+		ibo.bind();
+		
+		shader.uniform3f(shaderPosString, (float) x, (float) y, (float) z);
+		glDrawElements(GL_TRIANGLES, ibo.getElementCount(), GL_UNSIGNED_INT, 0);
+		
+		Shader.unbind();
+		VAO.unbind();
+		IBO.unbind();
+	}
+	
+	@Override
+	public void destroy()
+	{
+		shader.destroy();
+		ibo.destroy();
+		vao.destroy();
 	}
 	
 	public void setLocation(final double x, final double y, final double z)
@@ -32,31 +54,19 @@ public class Entity
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		shader.uniform3f(shaderUniformVar, (float) x, (float) y, (float) z);
-	}
-	public void setVelocities(final double xV, final double yV, final double zV)
-	{
-		this.xV = xV;
-		this.yV = yV;
-		this.zV = zV;
 	}
 	
-	public void move()
+	public void setX(final double x)
 	{
-		x += xV;
-		y += yV;
-		z += zV;
-		shader.uniform3f(shaderUniformVar, (float) x, (float) y, (float) z);
+		this.x = x;
 	}
-	
-	public Shader getShader()
+	public void setY(final double y)
 	{
-		return shader;
+		this.y = y;
 	}
-	
-	public RawModel getModel()
+	public void setZ(final double z)
 	{
-		return model;
+		this.z = z;
 	}
 	
 	public double getX()
@@ -70,25 +80,6 @@ public class Entity
 	public double getZ()
 	{
 		return z;
-	}
-	
-	public double getxV()
-	{
-		return xV;
-	}
-	public double getyV()
-	{
-		return yV;
-	}
-	public double getzV()
-	{
-		return zV;
-	}
-	
-	public void destroy()
-	{
-		shader.destroy();
-		model.destroy();
 	}
 	
 }
