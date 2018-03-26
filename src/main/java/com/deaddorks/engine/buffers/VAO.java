@@ -42,6 +42,7 @@ public class VAO
 	
 	public void bindVBO(final int index, final int components, final VBO vbo)
 	{
+		vbos.add(vbo);
 		enableVertexAttribute(index, components, GL_FLOAT, vbo.getId());
 	}
 	
