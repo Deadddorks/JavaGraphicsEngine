@@ -10,9 +10,9 @@ public abstract class UI
 {
 
 	private final Timer timer;
-	protected FrameInfoObject frameInfoObject;
+	protected final FrameInfoObject frameInfoObject;
 	
-	protected Window window;
+	protected final Window window;
 	protected final int width, height;
 	
 	public UI(final String title, final int width, final int height, final boolean resizable, final boolean decorated)

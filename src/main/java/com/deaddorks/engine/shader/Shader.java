@@ -121,6 +121,10 @@ public class Shader
 		shader.compile();
 		return shader;
 	}
+	public static Shader parseShaderFromFile(final String shaderDirPath)
+	{
+		return parseShaderFromFile(shaderDirPath + "vertex.shader", shaderDirPath + "fragment.shader");
+	}
 	
 	private static String readShaderFromFile(final String path)
 	{
