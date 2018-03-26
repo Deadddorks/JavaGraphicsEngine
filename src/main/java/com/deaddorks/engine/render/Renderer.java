@@ -7,13 +7,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Renderer
 {
-
-	public static void renderModel(final BasicModel model)
-	{
-	
-	
-	
-	}
 	
 	public static void renderModel(final RawModel model)
 	{
