@@ -17,12 +17,13 @@ public abstract class UI
 	
 	public UI(final String title, final int width, final int height, final boolean resizable, final boolean decorated)
 	{
-		window = new Window();
+		this.window = new Window();
 		window.create(title, width, height, resizable ? GLFW_TRUE : GLFW_FALSE, decorated ? GLFW_TRUE : GLFW_FALSE);
 		this.width = width;
 		this.height = height;
 		
-		timer = new Timer();
+		this.timer = new Timer();
+		this.frameInfoObject = new FrameInfoObject();
 	}
 	
 	protected abstract void init();
