@@ -10,7 +10,7 @@ public abstract class UI
 {
 
 	private final Timer timer;
-	private double frameDelay;
+	private FrameInfoObject frameInfoObject;
 	
 	protected Window window;
 	protected final int width, height;
@@ -44,7 +44,7 @@ public abstract class UI
 		while (!glfwWindowShouldClose(window.getId()))
 		{
 			handleInputs();
-			frameDelay = timer.readSecsExact();
+			frameInfoObject.frameDelay = timer.readSecsExact();
 			timer.start();
 			gameLoop();
 		}
@@ -54,18 +54,30 @@ public abstract class UI
 		
 	}
 	
-	protected double getFrameDelay()
+	public FrameInfoObject getFrameInfoObject()
 	{
-		return frameDelay;
+		return frameInfoObject;
 	}
 	
-	protected int getFrameRate()
+	public class FrameInfoObject
 	{
-		return (int) Math.round(getFrameRateRaw());
-	}
-	protected double getFrameRateRaw()
-	{
-		return 1 / frameDelay;
+		
+		private double frameDelay;
+		
+		public double getFrameDelay()
+		{
+			return frameDelay;
+		}
+		
+		public int getFrameRate()
+		{
+			return (int) Math.round(getFrameRateRaw());
+		}
+		public double getFrameRateRaw()
+		{
+			return 1 / frameDelay;
+		}
+		
 	}
 
 }
