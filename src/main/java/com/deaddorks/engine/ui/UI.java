@@ -10,7 +10,7 @@ public abstract class UI
 {
 
 	private final Timer timer;
-	private FrameInfoObject frameInfoObject;
+	protected FrameInfoObject frameInfoObject;
 	
 	protected Window window;
 	protected final int width, height;
@@ -62,7 +62,7 @@ public abstract class UI
 	public class FrameInfoObject
 	{
 		
-		private double frameDelay;
+		protected double frameDelay;
 		
 		public double getFrameDelay()
 		{
