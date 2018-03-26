@@ -29,6 +29,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.Deadddorks</groupId>
+            <artifactId>JavaLibraries</artifactId>
+            <version>v1.3.3</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.lwjgl</groupId>
             <artifactId>lwjgl</artifactId>
             <version>${lwjgl.version}</version>
