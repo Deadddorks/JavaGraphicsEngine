@@ -25,6 +25,14 @@ public class Entity extends RawModel
 		this.vao = vao;
 		this.ibo = ibo;
 	}
+	public Entity(final VAO vao, final IBO ibo, final Shader shader, final String shaderPosString)
+	{
+		this.shaderPosString = shaderPosString;
+		this.shader = shader;
+		
+		this.vao = vao;
+		this.ibo = ibo;
+	}
 	
 	@Override
 	public void render()
