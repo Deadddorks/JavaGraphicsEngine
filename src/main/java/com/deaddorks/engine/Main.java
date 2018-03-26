@@ -23,7 +23,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		
-		UI ui = new UI("Engine 2.0", 500, 500, false)
+		UI ui = new UI("Engine 2.0", 500, 500, false, true)
 		{
 			
 			private Shader shader;
