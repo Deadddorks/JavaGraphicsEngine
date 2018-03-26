@@ -3,7 +3,7 @@ package com.deaddorks.engine;
 import com.deaddorks.engine.buffers.IBO;
 import com.deaddorks.engine.buffers.VAO;
 import com.deaddorks.engine.buffers.VBO;
-import com.deaddorks.engine.model.Model;
+import com.deaddorks.engine.model.BasicModel;
 import com.deaddorks.engine.render.Renderer;
 import com.deaddorks.engine.shader.Shader;
 import com.deaddorks.engine.ui.UI;
@@ -25,7 +25,7 @@ public class Main
 		{
 			
 			private Shader shader;
-			private List<Model> models;
+			private List<BasicModel> models;
 			
 			@Override
 			protected void init()
@@ -51,7 +51,7 @@ public class Main
 						0.5f, 0.5f, 0.5f, 1.0f
 				}));
 				VAO.unbind();
-				models.add(new Model(new IBO(new int[] {
+				models.add(new BasicModel(new IBO(new int[] {
 						0, 1, 2,
 						2, 3, 0
 				}), vao, shader));
@@ -69,7 +69,7 @@ public class Main
 						0.0f, 0.0f, 1.0f, 1.0f
 				}));
 				VAO.unbind();
-				models.add(new Model(new IBO(new int[] {
+				models.add(new BasicModel(new IBO(new int[] {
 						0, 1, 2
 				}), vao2, shader));
 				
@@ -81,7 +81,7 @@ public class Main
 			{
 				glClear(GL_COLOR_BUFFER_BIT);
 				
-				for (Model model : models)
+				for (BasicModel model : models)
 				{
 					Renderer.renderModel(model);
 				}
