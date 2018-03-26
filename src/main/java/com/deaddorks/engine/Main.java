@@ -91,6 +91,12 @@ public class Main
 			}
 			
 			@Override
+			protected void handleInputs()
+			{
+			
+			}
+			
+			@Override
 			protected void cleanUp()
 			{
 				shader.destroy();

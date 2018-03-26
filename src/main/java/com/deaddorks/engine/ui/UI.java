@@ -1,5 +1,6 @@
 package com.deaddorks.engine.ui;
 
+import com.deaddorks.engine.input.KeyboardHandler;
 import com.deaddorks.engine.window.Window;
 import javaLibraries.util.time.Timer;
 
@@ -28,17 +29,21 @@ public abstract class UI
 	
 	protected abstract void gameLoop();
 	
+	protected abstract void handleInputs();
+	
 	protected abstract void cleanUp();
 	
 	public void run()
 	{
 		
+		glfwSetKeyCallback(window.getId(), new KeyboardHandler());
 		init();
 		timer.start();
 		
 		glfwShowWindow(window.getId());
 		while (!glfwWindowShouldClose(window.getId()))
 		{
+			handleInputs();
 			frameDelay = timer.readSecsExact();
 			timer.start();
 			gameLoop();
