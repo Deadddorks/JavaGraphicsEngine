@@ -8,15 +8,18 @@ import static org.lwjgl.glfw.GLFW.*;
 public abstract class UI
 {
 
-	private Timer timer;
-	protected Window window;
-	
+	private final Timer timer;
 	private double frameDelay;
+	
+	protected Window window;
+	protected final int width, height;
 	
 	public UI(final String title, final int width, final int height, final boolean resizable)
 	{
 		window = new Window();
 		window.create(title, width, height, resizable ? GLFW_TRUE : GLFW_FALSE);
+		this.width = width;
+		this.height = height;
 		
 		timer = new Timer();
 	}
