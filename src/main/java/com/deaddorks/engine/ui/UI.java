@@ -15,10 +15,10 @@ public abstract class UI
 	protected Window window;
 	protected final int width, height;
 	
-	public UI(final String title, final int width, final int height, final boolean resizable)
+	public UI(final String title, final int width, final int height, final boolean resizable, final boolean decorated)
 	{
 		window = new Window();
-		window.create(title, width, height, resizable ? GLFW_TRUE : GLFW_FALSE);
+		window.create(title, width, height, resizable ? GLFW_TRUE : GLFW_FALSE, decorated ? GLFW_TRUE : GLFW_FALSE);
 		this.width = width;
 		this.height = height;
 		

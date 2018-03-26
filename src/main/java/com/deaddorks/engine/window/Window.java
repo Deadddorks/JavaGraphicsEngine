@@ -15,7 +15,7 @@ public class Window
 	
 	}
 	
-	public void create(final String title, final int width, final int height, final int resizable)
+	public void create(final String title, final int width, final int height, final int resizable, final int decorated)
 	{
 		if (!glfwInit())
 		{
@@ -28,7 +28,7 @@ public class Window
 		glfwWindowHint(GLFW_RESIZABLE, resizable);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
-		// glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+		glfwWindowHint(GLFW_DECORATED, decorated);
 		
 		id = glfwCreateWindow(width, height, title, 0, 0);
 		if (id == 0)

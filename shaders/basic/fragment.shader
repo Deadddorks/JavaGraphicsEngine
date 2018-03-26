@@ -6,7 +6,7 @@ in struct Vertex {
     vec2 uv;
 } v;
 
-out vec4 out_Color;;
+out vec4 out_Color;
 
 void main(void)
 {
