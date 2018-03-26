@@ -3,7 +3,9 @@ package com.deaddorks.engine;
 import com.deaddorks.engine.buffers.IBO;
 import com.deaddorks.engine.buffers.VAO;
 import com.deaddorks.engine.buffers.VBO;
+import com.deaddorks.engine.entity.Entity;
 import com.deaddorks.engine.model.BasicModel;
+import com.deaddorks.engine.model.RawModel;
 import com.deaddorks.engine.render.Renderer;
 import com.deaddorks.engine.shader.Shader;
 import com.deaddorks.engine.ui.UI;
@@ -25,7 +27,7 @@ public class Main
 		{
 			
 			private Shader shader;
-			private List<BasicModel> models;
+			private List<RawModel> models;
 			
 			@Override
 			protected void init()
@@ -69,10 +71,16 @@ public class Main
 						0.0f, 0.0f, 1.0f, 1.0f
 				}));
 				VAO.unbind();
-				models.add(new BasicModel(new IBO(new int[] {
-						0, 1, 2
-				}), vao2, shader));
 				
+				IBO ibo2 =new IBO(new int[] {
+						0, 1, 2
+				});
+				
+				shader = Shader.parseShaderFromFile("shaders/entity/vertex.shader", "shaders/entity/fragment.shader");
+				Entity entity = new Entity(vao2, ibo2, shader, "location");
+				models.add(entity);
+				
+				entity.setLocation(-0.75, -0.75, 0);
 				
 			}
 			
@@ -81,7 +89,7 @@ public class Main
 			{
 				glClear(GL_COLOR_BUFFER_BIT);
 				
-				for (BasicModel model : models)
+				for (RawModel model : models)
 				{
 					Renderer.renderModel(model);
 				}
@@ -99,7 +107,10 @@ public class Main
 			@Override
 			protected void cleanUp()
 			{
-				shader.destroy();
+				for (RawModel model : models)
+				{
+					model.destroy();
+				}
 			}
 		};
 		

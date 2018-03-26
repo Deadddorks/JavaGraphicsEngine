@@ -19,11 +19,7 @@ public class Entity extends RawModel
 	
 	public Entity(final VAO vao, final IBO ibo, final String shaderDirPath, final String shaderPosString)
 	{
-		this.shaderPosString = shaderPosString;
-		this.shader = Shader.parseShaderFromFile(shaderDirPath + "vertex.shader", shaderDirPath + "fragment.shader");
-		
-		this.vao = vao;
-		this.ibo = ibo;
+		this(vao, ibo, Shader.parseShaderFromFile(shaderDirPath + "vertex.shader", shaderDirPath + "fragment.shader"), shaderPosString);
 	}
 	public Entity(final VAO vao, final IBO ibo, final Shader shader, final String shaderPosString)
 	{
@@ -32,16 +28,21 @@ public class Entity extends RawModel
 		
 		this.vao = vao;
 		this.ibo = ibo;
+		
+		this.x = 0;
+		this.y = 0;
+		this.z = 0;
 	}
 	
 	@Override
 	public void render()
 	{
+		shader.uniform3f(shaderPosString, (float) x, (float) y, (float) z);
+		
 		shader.use();
 		vao.bind();
 		ibo.bind();
 		
-		shader.uniform3f(shaderPosString, (float) x, (float) y, (float) z);
 		glDrawElements(GL_TRIANGLES, ibo.getElementCount(), GL_UNSIGNED_INT, 0);
 		
 		Shader.unbind();
