@@ -1,38 +1,17 @@
+import com.deaddorks.engine.textures.Texture;
 
 public class Test
 {
-
+	
 	public static void main(String[] args)
 	{
-		Inner in = new Inner();
-		
-		for (int i = 0; i < 10; i++)
+		Texture texture = new Texture("res/pwn.png");
+		System.out.println("size: " + texture.getPixels().length);
+		for (int i : texture.getPixels())
 		{
-			System.out.println(in.inc());
+			System.out.println(i);
 		}
+		
 	}
 	
-	private static class Inner
-	{
-		private int i;
-		
-		private Inner()
-		{
-			this.i = 0;
-		}
-		
-		private int inc()
-		{
-			try
-			{
-				return i;
-			}
-			finally
-			{
-				i++;
-			}
-		}
-		
-	}
-
 }

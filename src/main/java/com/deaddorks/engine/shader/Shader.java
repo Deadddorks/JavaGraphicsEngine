@@ -1,5 +1,10 @@
 package com.deaddorks.engine.shader;
 
+import com.deaddorks.engine.textures.Texture;
+import com.deaddorks.engine.vectors.Vec1f;
+import com.deaddorks.engine.vectors.Vec2f;
+import com.deaddorks.engine.vectors.Vec3f;
+import com.deaddorks.engine.vectors.Vec4f;
 import org.lwjgl.BufferUtils;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -46,11 +51,19 @@ public class Shader
 		return glGetUniformLocation(getId(), uniformName);
 	}
 	
+	public void uniform1f(final String uniformName, final Vec1f v)
+	{
+		uniform1f(uniformName, v.getV1());
+	}
 	public void uniform1f(final String uniformName, final float v1)
 	{
 		use();
 		glUniform1f(getUniformLoc(uniformName), v1);
 		unbind();
+	}
+	public void uniform2f(final String uniformName, final Vec2f v)
+	{
+		uniform2f(uniformName, v.getV1(), v.getV2());
 	}
 	public void uniform2f(final String uniformName, final float v1, final float v2)
 	{
@@ -58,16 +71,31 @@ public class Shader
 		glUniform2f(getUniformLoc(uniformName), v1, v2);
 		unbind();
 	}
+	public void uniform3f(final String uniformName, final Vec3f v)
+	{
+		uniform3f(uniformName, v.getV1(), v.getV2(), v.getV3());
+	}
 	public void uniform3f(final String uniformName, final float v1, final float v2, final float v3)
 	{
 		use();
 		glUniform3f(getUniformLoc(uniformName), v1, v2, v3);
 		unbind();
 	}
+	public void uniform4f(final String uniformName, final Vec4f v)
+	{
+		uniform4f(uniformName, v.getV1(), v.getV2(), v.getV3(), v.getV4());
+	}
 	public void uniform4f(final String uniformName, final float v1, final float v2, final float v3, final float v4)
 	{
 		use();
 		glUniform4f(getUniformLoc(uniformName), v1, v2, v3, v4);
+		unbind();
+	}
+	
+	public void uniformTexture(final String uniformName, final Texture texture)
+	{
+		use();
+		glGetUniformiv(id, getUniformLoc(uniformName), texture.getPixels());
 		unbind();
 	}
 	

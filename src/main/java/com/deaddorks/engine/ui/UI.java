@@ -1,8 +1,13 @@
 package com.deaddorks.engine.ui;
 
+import com.deaddorks.engine.input.Inputs;
 import com.deaddorks.engine.input.KeyboardHandler;
 import com.deaddorks.engine.window.Window;
+import com.deaddorks.engine.window.WindowPos;
 import javaLibraries.util.time.Timer;
+import org.lwjgl.BufferUtils;
+
+import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -15,10 +20,9 @@ public abstract class UI
 	protected final Window window;
 	protected final int width, height;
 	
-	public UI(final String title, final int width, final int height, final boolean resizable, final boolean decorated)
+	public UI(final String title, final int width, final int height, final WindowHint... hints)
 	{
-		this.window = new Window();
-		window.create(title, width, height, resizable ? GLFW_TRUE : GLFW_FALSE, decorated ? GLFW_TRUE : GLFW_FALSE);
+		this.window = new Window(title, width, height, hints);
 		this.width = width;
 		this.height = height;
 		
@@ -58,6 +62,11 @@ public abstract class UI
 	public FrameInfoObject getFrameInfoObject()
 	{
 		return frameInfoObject;
+	}
+	
+	protected boolean key(final int keyCode)
+	{
+		return Inputs.isKeyPressed(keyCode);
 	}
 	
 	public class FrameInfoObject
