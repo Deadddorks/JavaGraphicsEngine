@@ -2,6 +2,8 @@ package com.deaddorks.engine.textures;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.*;
+import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30.*;
 
 import org.lwjgl.system.MemoryStack;
 
@@ -17,12 +19,15 @@ public class Texture
 {
 
 	private final int id;
-	private final int width, height;
-	private final int[] pixels;
-	private final int components;
+	private final int slot;
 	
-	public Texture(final String filePath)
+	public Texture(final String filePath, final int slot)
 	{
+		int width;
+		int height;
+		int components;
+		int[] pixels;
+		
 		try (MemoryStack stack = MemoryStack.stackPush()) {
 			IntBuffer w = stack.mallocInt(1);
 			IntBuffer h = stack.mallocInt(1);
@@ -39,26 +44,20 @@ public class Texture
 			stbi_image_free(buffer);
 		}
 		
+		this.slot = slot;
 		id = glGenTextures();
+		glActiveTexture(GL_TEXTURE0 + slot);
+		glBindTexture(GL_TEXTURE_2D, id);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0 ,GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	}
 	
-	public int getWidth()
+	public int getId()
 	{
-		return width;
+		return id;
 	}
-	public int getHeight()
+	public int getSlot()
 	{
-		return height;
-	}
-	
-	public int[] getPixels()
-	{
-		return pixels;
-	}
-	
-	public int getComponents()
-	{
-		return components;
+		return slot;
 	}
 	
 }

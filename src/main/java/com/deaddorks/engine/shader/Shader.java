@@ -92,10 +92,10 @@ public class Shader
 		unbind();
 	}
 	
-	public void uniformTexture(final String uniformName, final Texture texture)
+	public void uniform1i(final String uniformName, final int i1)
 	{
 		use();
-		glGetUniformiv(id, getUniformLoc(uniformName), texture.getPixels());
+		glUniform1i(getUniformLoc(uniformName), i1);
 		unbind();
 	}
 	

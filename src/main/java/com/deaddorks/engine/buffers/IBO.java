@@ -1,5 +1,6 @@
 package com.deaddorks.engine.buffers;
 
+import com.deaddorks.engine.utils.Buffers;
 import org.lwjgl.BufferUtils;
 
 import java.nio.IntBuffer;
@@ -17,11 +18,11 @@ public class IBO
 	private int id;
 	private int elementCount;
 	
-	public IBO(final int[] indices)
+	public IBO(final int... indices)
 	{
 		id = glGenBuffers();
 		elementCount = indices.length;
-		IntBuffer buffer = arrayToBuffer(indices);
+		IntBuffer buffer = Buffers.genIntBuffer(indices);
 		bind();
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, buffer, GL_STATIC_DRAW);
 	}
@@ -34,14 +35,6 @@ public class IBO
 	public static void unbind()
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	}
-	
-	private IntBuffer arrayToBuffer(final int[] vals)
-	{
-		IntBuffer buffer = BufferUtils.createIntBuffer(vals.length);
-		buffer.put(vals);
-		buffer.flip();
-		return buffer;
 	}
 	
 	public int getId()

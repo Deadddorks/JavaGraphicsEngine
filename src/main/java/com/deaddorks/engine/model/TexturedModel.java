@@ -6,6 +6,10 @@ import com.deaddorks.engine.buffers.VBO;
 import com.deaddorks.engine.shader.Shader;
 import com.deaddorks.engine.textures.Texture;
 
+import static org.lwjgl.opengl.GL11.GL_TRIANGLES;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_INT;
+import static org.lwjgl.opengl.GL11.glDrawElements;
+
 public class TexturedModel extends RawModel
 {
 	
@@ -22,16 +26,25 @@ public class TexturedModel extends RawModel
 		
 		vao = new VAO();
 		vao.bind();
-		vao.bindVBO(0, 2, positions);
+		vao.bindVBO(0, 3, positions);
 		vao.bindVBO(1, 2, textureUV);
 		VAO.unbind();
-		
 	}
 	
 	@Override
 	public void render()
 	{
-		shader.uniformTexture("texture", texture);
+		shader.uniform1i("tex", texture.getSlot());
+		
+		shader.use();
+		vao.bind();
+		ibo.bind();
+		
+		glDrawElements(GL_TRIANGLES, ibo.getElementCount(), GL_UNSIGNED_INT, 0);
+		
+		Shader.unbind();
+		VAO.unbind();
+		IBO.unbind();
 	}
 	
 	@Override

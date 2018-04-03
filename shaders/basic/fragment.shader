@@ -3,7 +3,6 @@
 in struct Vertex {
     vec3 position;
     vec4 color;
-    vec2 uv;
 } v;
 
 out vec4 out_Color;

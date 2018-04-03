@@ -1,6 +1,6 @@
 package com.deaddorks.engine.buffers;
 
-import org.lwjgl.BufferUtils;
+import com.deaddorks.engine.utils.Buffers;
 
 import java.nio.FloatBuffer;
 
@@ -14,10 +14,10 @@ public class VBO
 
 	private int id;
 
-	public VBO(final float[] vertices)
+	public VBO(final float... vertices)
 	{
 		id = glGenBuffers();
-		FloatBuffer buffer = arrayToBuffer(vertices);
+		FloatBuffer buffer = Buffers.genFloatBuffer(vertices);
 		bind();
 		glBufferData(GL_ARRAY_BUFFER, buffer, GL_STATIC_DRAW);
 	}
@@ -43,12 +43,5 @@ public class VBO
 		glDeleteBuffers(id);
 	}
 	
-	private FloatBuffer arrayToBuffer(final float[] vals)
-	{
-		FloatBuffer buffer = BufferUtils.createFloatBuffer(vals.length);
-		buffer.put(vals);
-		buffer.flip();
-		return buffer;
-	}
 	
 }

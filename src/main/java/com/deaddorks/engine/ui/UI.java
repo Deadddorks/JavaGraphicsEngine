@@ -2,6 +2,10 @@ package com.deaddorks.engine.ui;
 
 import com.deaddorks.engine.input.Inputs;
 import com.deaddorks.engine.input.KeyboardHandler;
+import com.deaddorks.engine.model.RawModel;
+import com.deaddorks.engine.render.Renderer;
+import com.deaddorks.engine.textures.Texture;
+import com.deaddorks.engine.textures.TextureLoader;
 import com.deaddorks.engine.window.Window;
 import com.deaddorks.engine.window.WindowPos;
 import javaLibraries.util.time.Timer;
@@ -20,6 +24,9 @@ public abstract class UI
 	protected final Window window;
 	protected final int width, height;
 	
+	private TextureLoader textureLoader;
+	protected Renderer renderer;
+	
 	public UI(final String title, final int width, final int height, final WindowHint... hints)
 	{
 		this.window = new Window(title, width, height, hints);
@@ -28,6 +35,9 @@ public abstract class UI
 		
 		this.timer = new Timer();
 		this.frameInfoObject = new FrameInfoObject();
+		
+		textureLoader = new TextureLoader(32);
+		renderer = new Renderer();
 	}
 	
 	protected abstract void init();
@@ -67,6 +77,16 @@ public abstract class UI
 	protected boolean key(final int keyCode)
 	{
 		return Inputs.isKeyPressed(keyCode);
+	}
+	
+	protected Texture loadTexture(final String filePath)
+	{
+		return textureLoader.loadTexture(filePath);
+	}
+	
+	protected void addModel(final RawModel model)
+	{
+		renderer.addModel(model);
 	}
 	
 	public class FrameInfoObject

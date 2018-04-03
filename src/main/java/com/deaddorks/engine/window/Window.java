@@ -37,6 +37,8 @@ public class Window
 			throw new IllegalStateException("glfwCreateWindow()");
 		}
 		
+		// glfwSetWindowIcon(id, );
+		
 		glfwMakeContextCurrent(id);
 		GL.createCapabilities();
 		
