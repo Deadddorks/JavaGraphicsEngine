@@ -40,7 +40,7 @@ public class Main
 								0.5f, 0.5f, 0.0f,
 								-0.5f, 0.5f, 0.0f),
 						new VBO(0, 0, 1, 0, 1, 1, 0, 1),
-						loadTexture("res/pwn.png")));
+						loadTexture("res/hexagon.jpg")));
 			}
 			
 			@Override
